@@ -1,0 +1,36 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  hello-d
+  labels:
+    app: rails-hello
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: rails-hello
+  template:
+    metadata:
+      labels:
+        app: rails-hello
+    spec:
+      containers:
+        - name: app
+          image: localhost:5000/rails-hello:1.0.0
+          ports:
+          - containerPort: 3000
+          env:
+          - name: POSTGRES_USER
+            value: 'postgres'
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-postgresql
+                key: postgresql-password
+          - name: POSTGRES_HOST
+            value: 'postgres-postgresql'
+          - name: POSTGRES_DB
+            value: 'hello'
+          - name: POSTGRES_TEST_DB
+            value: 'hello_test'

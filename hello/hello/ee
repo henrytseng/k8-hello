@@ -1,0 +1,7 @@
+#!/bin/sh
+export POSTGRES_USER='postgres'
+export POSTGRES_PASSWORD='SFGc0bGYMK'
+export POSTGRES_HOST='postgres-postgresql'
+export POSTGRES_DB='hello'
+export POSTGRES_TEST_DB='hello_test'
+
